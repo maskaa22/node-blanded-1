@@ -1,18 +1,21 @@
-import {createFakeProduct} from "../utils/createFakeProducts.js"
-import fs from "node:fs/promises"
-import {PATH_DB} from "../constants/products.js"
+import { createFakeProduct } from '../utils/createFakeProducts.js';
+import fs from 'node:fs/promises';
+import { PATH_DB } from '../constants/products.js';
+import { readProducts } from '../utils/readProducts.js';
 
-
-const addOneProduct = async()=> {
-    try {
-        const data = await fs.readFile(PATH_DB, "utf-8");
-        const parsedData = data.length > 0 ? JSON.parse(data) : [];
-        const product = createFakeProduct();
-        const updateProducts = [...parsedData, product]
-        await fs.writeFile(PATH_DB, JSON.stringify(updateProducts, null, 2), "utf-8")
-    } catch (error) {
-        console.log(error);
-        
-    }
+const addOneProduct = async () => {
+  try {
+    const parsedData = await readProducts();
+    const product = createFakeProduct();
+    const updateProducts = [...parsedData, product];
+    await fs.writeFile(
+      PATH_DB,
+      JSON.stringify(updateProducts, null, 2),
+      'utf-8',
+    );
+    console.log('Added one product');
+  } catch (error) {
+    console.log(error);
+  }
 };
 addOneProduct();

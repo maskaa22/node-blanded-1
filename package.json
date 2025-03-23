@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "generate": "node src/scripts/generateProducts.js",
-    "add-one": "node src/scripts/addOneProduct.js"
+    "add-one": "node src/scripts/addOneProduct.js",
+    "get-all": "node src/scripts/getAllProducts.js",
+    "count": "node src/scripts/countProducts.js"
   },
   "repository": {
     "type": "git",
